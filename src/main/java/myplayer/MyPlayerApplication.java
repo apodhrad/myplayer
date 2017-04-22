@@ -15,11 +15,18 @@ import java.nio.file.WatchService;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MyPlayerApplication {
+	
+	private static final Logger log = LoggerFactory.getLogger(MyPlayerApplication.class);
 
 	private static MyPlayer myPlayer;
 
 	private static void init() {
+		log.info("Initialize myPlayer");
+		log.error("Just a test error");
 		try {
 			myPlayer = new MyPlayer();
 		} catch (LineUnavailableException lue) {
