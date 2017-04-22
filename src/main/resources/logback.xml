@@ -3,15 +3,15 @@
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level - %msg%n</pattern>
 		</encoder>
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/home/apodhrad/Temp/logs/myplayer.log</file>
+		<file>${user.home}/.myplayer/myplayer.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       		<!-- rollover daily -->
-      		<fileNamePattern>/home/apodhrad/Temp/logs/myplayer-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      		<fileNamePattern>${user.home}/.myplayer/myplayer-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
        		<!-- each file should be at most 1MB, keep 30 days worth of history, but at most 10MB -->
        		<maxFileSize>1MB</maxFileSize>    
        		<maxHistory>30</maxHistory>

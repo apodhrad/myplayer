@@ -20,13 +20,6 @@ public class MyPlayer {
 	public MyPlayer() throws LineUnavailableException {
 		clip = AudioSystem.getClip();
 		time = 0;
-		
-		try {
-			song("file:/home/apodhrad/Music/flac/Plusminus/133/Track 1.flac");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public String song(String url) throws MalformedURLException {
@@ -42,7 +35,7 @@ public class MyPlayer {
 		}
 
 		if (!clip.isOpen()) {
-			clip.open(getAudioInputStream(songUrl));
+			clip.open(getAudioInputStream());
 		}
 
 		clip.setMicrosecondPosition(time);
@@ -63,8 +56,12 @@ public class MyPlayer {
 		return "Stopped";
 	}
 
-	private AudioInputStream getAudioInputStream(URL url) throws UnsupportedAudioFileException, IOException {
-		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
+	private AudioInputStream getAudioInputStream() throws UnsupportedAudioFileException, IOException {
+		if (songUrl == null) {
+			throw new IllegalStateException("No song has been set");
+		}
+
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(songUrl);
 
 		// Audio format provides information like sample rate, size, channels.
 		AudioFormat audioFormat = audioInputStream.getFormat();
